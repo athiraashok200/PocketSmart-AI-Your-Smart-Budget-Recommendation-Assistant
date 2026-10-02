@@ -1,0 +1,506 @@
+Project Design Phase
+     ## Project Design Phase
+
+### **PocketSmart AI: Your Smart Budget Recommendation Assistant**
+
+### 1. Introduction
+
+The **Design Phase** defines the structure, architecture, interface, database, and working flow of **PocketSmart AI**. Based on the requirements identified during the requirement analysis phase, this phase explains how the system will be developed and how its different components will interact.
+
+The main aim of the design is to create a **simple, secure, user-friendly, and intelligent budgeting system** that can analyze users' financial data and provide personalized budget recommendations.
+
+---
+
+### 2. System Architecture
+
+PocketSmart AI follows a layered architecture consisting of the following major components:
+
+**User → User Interface → Application Server → AI Recommendation Engine → Database**
+
+#### Main Components
+
+1. **User Interface**
+
+   * Login and registration
+   * Dashboard
+   * Income and expense entry
+   * Budget management
+   * Financial reports
+   * AI recommendations
+
+2. **Application Layer**
+
+   * Handles user requests.
+   * Performs budget calculations.
+   * Processes income and expense data.
+   * Communicates with the database.
+   * Sends relevant information to the recommendation engine.
+
+3. **AI Recommendation Engine**
+
+   * Analyzes spending patterns.
+   * Identifies high-expense categories.
+   * Calculates spending trends.
+   * Generates personalized budget suggestions.
+
+4. **Database**
+
+   * Stores user details.
+   * Stores income and expense transactions.
+   * Stores budget information.
+   * Stores financial goals and recommendation history.
+
+---
+
+### 3. System Design Diagram
+
+```text
+                ┌─────────────────────┐
+                │       USER          │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │   User Interface    │
+                │ Dashboard / Forms   │
+                └──────────┬──────────┘
+                           │
+                           ▼
+                ┌─────────────────────┐
+                │ Application Layer   │
+                │                     │
+                │ • User Management   │
+                │ • Budget Management │
+                │ • Expense Analysis  │
+                └───────┬───────┬─────┘
+                        │       │
+             ┌──────────┘       └──────────┐
+             ▼                             ▼
+    ┌─────────────────┐          ┌──────────────────┐
+    │    Database     │          │ AI Recommendation │
+    │                 │◄────────►│     Engine        │
+    │ Users           │          │                  │
+    │ Income          │          │ Spending Analysis│
+    │ Expenses        │          │ Budget Advice    │
+    │ Budgets         │          │ Suggestions      │
+    └─────────────────┘          └────────┬─────────┘
+                                          │
+                                          ▼
+                               ┌────────────────────┐
+                               │ Personalized       │
+                               │ Recommendations    │
+                               └────────────────────┘
+```
+
+---
+
+### 4. Module Design
+
+The system is divided into several modules.
+
+#### 4.1 User Management Module
+
+This module manages user accounts.
+
+**Functions:**
+
+* User registration
+* User login
+* Logout
+* Profile management
+* Authentication
+
+#### 4.2 Income Management Module
+
+This module allows users to record their income.
+
+**Functions:**
+
+* Add income
+* Edit income
+* Delete income
+* View total income
+* Categorize income sources
+
+#### 4.3 Expense Management Module
+
+This module manages the user's spending information.
+
+**Functions:**
+
+* Add expenses
+* Edit expenses
+* Delete expenses
+* Categorize expenses
+* View transaction history
+
+Example categories:
+
+* Food
+* Transportation
+* Shopping
+* Education
+* Entertainment
+* Bills
+* Healthcare
+* Other
+
+#### 4.4 Budget Management Module
+
+This module helps users create and monitor budgets.
+
+**Functions:**
+
+* Set monthly budget
+* Set category-wise limits
+* Calculate total spending
+* Calculate remaining budget
+* Display budget status
+
+**Basic calculation:**
+
+```text
+Remaining Budget = Total Income - Total Expenses
+```
+
+#### 4.5 AI Recommendation Module
+
+This is the main intelligent component of PocketSmart AI.
+
+The module analyzes:
+
+* Monthly income
+* Monthly expenses
+* Category-wise spending
+* Spending frequency
+* Previous spending patterns
+* Budget limits
+* Savings goals
+
+It then generates recommendations such as:
+
+> "Your food expenses are higher than your planned limit. Consider reducing food spending this month."
+
+or
+
+> "You have ₹5,000 remaining from your monthly budget. Consider allocating ₹2,000 toward your savings goal."
+
+#### 4.6 Dashboard Module
+
+The dashboard provides a summary of the user's financial information.
+
+It can display:
+
+* Total income
+* Total expenses
+* Remaining balance
+* Savings
+* Budget utilization
+* Highest spending category
+* AI recommendations
+
+#### 4.7 Report Module
+
+The report module provides financial summaries using tables and charts.
+
+Possible reports include:
+
+* Daily expense report
+* Weekly expense report
+* Monthly expense report
+* Category-wise expense report
+* Income vs. expense report
+* Savings report
+
+---
+
+### 5. Database Design
+
+The database stores and manages all important user and financial information.
+
+#### Main Tables
+
+**User Table**
+
+| Field        | Description                |
+| ------------ | -------------------------- |
+| User_ID      | Unique user identification |
+| Name         | User name                  |
+| Email        | User email                 |
+| Password     | Encrypted password         |
+| Created_Date | Account creation date      |
+
+**Income Table**
+
+| Field     | Description      |
+| --------- | ---------------- |
+| Income_ID | Unique income ID |
+| User_ID   | Associated user  |
+| Source    | Income source    |
+| Amount    | Income amount    |
+| Date      | Income date      |
+
+**Expense Table**
+
+| Field       | Description       |
+| ----------- | ----------------- |
+| Expense_ID  | Unique expense ID |
+| User_ID     | Associated user   |
+| Category    | Expense category  |
+| Amount      | Expense amount    |
+| Description | Expense details   |
+| Date        | Expense date      |
+
+**Budget Table**
+
+| Field          | Description            |
+| -------------- | ---------------------- |
+| Budget_ID      | Unique budget ID       |
+| User_ID        | Associated user        |
+| Month          | Budget month           |
+| Total_Budget   | Total planned budget   |
+| Spending_Limit | Maximum spending limit |
+
+**Goal Table**
+
+| Field         | Description            |
+| ------------- | ---------------------- |
+| Goal_ID       | Unique goal ID         |
+| User_ID       | Associated user        |
+| Goal_Name     | Name of financial goal |
+| Target_Amount | Target amount          |
+| Saved_Amount  | Current saved amount   |
+| Deadline      | Target date            |
+
+**Recommendation Table**
+
+| Field             | Description               |
+| ----------------- | ------------------------- |
+| Recommendation_ID | Unique recommendation ID  |
+| User_ID           | Associated user           |
+| Category          | Related spending category |
+| Recommendation    | AI-generated advice       |
+| Date              | Recommendation date       |
+
+---
+
+### 6. Entity Relationship Design
+
+The basic relationship between entities is:
+
+```text
+USER
+ │
+ ├──────────< INCOME
+ │
+ ├──────────< EXPENSE
+ │
+ ├──────────< BUDGET
+ │
+ ├──────────< GOAL
+ │
+ └──────────< RECOMMENDATION
+```
+
+One user can have multiple income records, expenses, budgets, goals, and recommendations.
+
+---
+
+### 7. Data Flow Design
+
+#### Level 0 – Context Diagram
+
+```text
+                 ┌───────────────┐
+                 │     USER      │
+                 └───────┬───────┘
+                         │
+                 Income / Expense
+                 Budget / Goals
+                         │
+                         ▼
+              ┌────────────────────┐
+              │   PocketSmart AI   │
+              │                    │
+              │ Budget & Analysis  │
+              │ Recommendation     │
+              └─────────┬──────────┘
+                        │
+                        ▼
+              Budget Suggestions
+              Reports / Analysis
+```
+
+#### Level 1 – Data Flow
+
+```text
+User
+ │
+ ▼
+Login / Registration
+ │
+ ▼
+Dashboard
+ │
+ ├──► Income Management
+ │
+ ├──► Expense Management
+ │
+ ├──► Budget Management
+ │
+ └──► Financial Goals
+          │
+          ▼
+    Data Processing
+          │
+          ▼
+   Spending Analysis
+          │
+          ▼
+ AI Recommendation Engine
+          │
+          ▼
+ Personalized Recommendations
+```
+
+---
+
+### 8. User Interface Design
+
+The application should have a clean and simple interface.
+
+#### Main Screens
+
+**1. Login Page**
+
+* Email/username
+* Password
+* Login button
+* Registration option
+
+**2. Registration Page**
+
+* Name
+* Email
+* Password
+* Confirm password
+* Register button
+
+**3. Dashboard**
+
+* Income summary
+* Expense summary
+* Remaining budget
+* Savings
+* Spending chart
+* AI recommendation section
+
+**4. Add Expense Page**
+
+* Amount
+* Category
+* Date
+* Description
+* Save button
+
+**5. Budget Page**
+
+* Monthly budget
+* Category limits
+* Used amount
+* Remaining amount
+
+**6. Recommendation Page**
+
+* Spending analysis
+* Personalized suggestions
+* Savings recommendations
+* Budget alerts
+
+---
+
+### 9. AI Recommendation Design
+
+The recommendation process is designed as follows:
+
+```text
+User Financial Data
+        │
+        ▼
+Data Collection
+        │
+        ▼
+Data Cleaning & Processing
+        │
+        ▼
+Spending Pattern Analysis
+        │
+        ▼
+Identify High-Spending Areas
+        │
+        ▼
+Compare With Budget
+        │
+        ▼
+Generate Recommendations
+        │
+        ▼
+Display Personalized Advice
+```
+
+The recommendation engine can use rule-based logic or machine-learning techniques depending on the implementation.
+
+For example:
+
+```text
+IF Food Expense > Food Budget
+THEN
+    Recommend reducing food expenses
+
+IF Monthly Expense > Monthly Budget
+THEN
+    Display overspending alert
+
+IF Savings < Savings Target
+THEN
+    Recommend increasing monthly savings
+```
+
+---
+
+### 10. Security Design
+
+The system should include basic security mechanisms such as:
+
+* Secure user authentication.
+* Password encryption/hashing.
+* User-specific access to financial data.
+* Input validation.
+* Protection against unauthorized database access.
+* Secure handling of sensitive financial information.
+
+---
+
+### 11. Technology Design
+
+A possible technology stack is:
+
+| Layer            | Technology                               |
+| ---------------- | ---------------------------------------- |
+| Front End        | HTML, CSS, JavaScript                    |
+| Back End         | Python / Flask                           |
+| Database         | MySQL / SQLite                           |
+| AI Module        | Python-based recommendation logic        |
+| Charts           | Chart.js / similar visualization library |
+| Development Tool | VS Code                                  |
+| Browser          | Google Chrome / Microsoft Edge           |
+
+The exact technologies can be changed according to the implementation requirements.
+
+---
+
+### 12. Expected Design Outcome
+
+The design phase provides the blueprint for implementing **PocketSmart AI**. The proposed design integrates **user management, income and expense tracking, budget planning, financial analysis, AI-based recommendations, and reporting** into a single system.
+
+The final system is designed to give users a clear view of their financial activities and provide personalized recommendations to help them manage their budgets more effectively.
