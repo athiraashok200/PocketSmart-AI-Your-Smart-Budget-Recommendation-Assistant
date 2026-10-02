@@ -233,7 +233,1224 @@ AI Recommendation
 
  This gives the project a clear **Brainstorming → Requirements → UI/UX → Development → AI Integration → Testing → Deployment** path.
 Requirement Analysis Phase
+                    # PocketSmart AI — Requirement Analysis Phase
+
+ ## 1\. Project Overview
+
+ **Project Name:** PocketSmart AI\
+ **Project Title:** _Your Smart Budget & Recommendation Assistant_
+
+ **Purpose:**\
+ PocketSmart AI is a web-based personal finance assistant that helps users track income and expenses, create personalized budgets, monitor savings goals, analyze spending patterns, and receive AI-powered financial recommendations.
+
+ ## 2\. Problem Definition
+
+ Users often record expenses inconsistently and may find it difficult to understand their spending patterns or maintain a realistic budget.
+
+ PocketSmart AI addresses this by combining:
+
+ - Expense tracking
+- Budget management
+- Savings goals
+- Financial analytics
+- AI-powered recommendations
+- A simple visual dashboard
+
+ ## 3\. Objectives
+
+ The system should:
+
+ 1. Allow users to securely create and manage their accounts.
+2. Allow users to record income and expenses.
+3. Automatically categorize expenses.
+4. Calculate budgets and remaining balances.
+5. Help users create and monitor savings goals.
+6. Visualize financial information using charts.
+7. Detect spending patterns.
+8. Generate personalized AI recommendations.
+9. Alert users when spending approaches budget limits.
+10. Provide a simple and responsive user experience.
+
+ ## 4\. Functional Requirements
+
+ ### FR-01 — User Registration
+
+ The system shall allow users to:
+
+ - Create an account.
+- Provide basic profile information.
+- Log in and log out.
+- Reset their password.
+
+ ### FR-02 — User Profile
+
+ Users shall be able to manage:
+
+ - Name
+- Email
+- Preferred currency
+- Monthly income
+- Financial preferences
+
+ ### FR-03 — Income Management
+
+ Users shall be able to:
+
+ - Add income.
+- Edit income.
+- Delete income.
+- Specify income source.
+- View income history.
+
+ Example:
+
+```
+Salary       ₹40,000
+Freelance    ₹8,000
+Other        ₹2,000
+--------------------
+Total        ₹50,000
+```
+
+ ### FR-04 — Expense Management
+
+ Users shall be able to:
+
+ - Add an expense.
+- Edit an expense.
+- Delete an expense.
+- Select an expense category.
+- Add a description.
+- Select a date.
+- Specify the amount.
+
+ Suggested categories:
+
+ - Food
+- Transport
+- Shopping
+- Bills
+- Entertainment
+- Healthcare
+- Education
+- Other
+
+ ### FR-05 — Budget Management
+
+ The system shall allow users to:
+
+ - Create monthly budgets.
+- Set category-specific spending limits.
+- View budget utilization.
+- Modify budgets.
+- Monitor remaining budget.
+
+ Example:
+
+```
+Food          ₹5,000 / ₹7,000
+Transport     ₹2,500 / ₹4,000
+Shopping      ₹3,200 / ₹5,000
+Bills         ₹6,000 / ₹8,000
+```
+
+ ### FR-06 — Savings Goals
+
+ Users shall be able to create financial goals.
+
+ Each goal can contain:
+
+ - Goal name
+- Target amount
+- Current savings
+- Target date
+- Progress percentage
+
+ Example:
+
+```
+Emergency Fund
+
+Target:       ₹50,000
+Saved:        ₹32,000
+Progress:     64%
+```
+
+ ### FR-07 — Dashboard
+
+ The dashboard shall provide a summarized view of:
+
+ - Total income
+- Total expenses
+- Available balance
+- Savings
+- Budget utilization
+- Expense categories
+- Financial goals
+- AI recommendations
+
+ ### FR-08 — Financial Analytics
+
+ The system should provide:
+
+ - Daily spending
+- Weekly spending
+- Monthly spending
+- Category-wise expenses
+- Income vs. expenses
+- Savings trends
+
+ Charts can be used to make these insights easier to understand.
+
+ ### FR-09 — AI Recommendation Engine
+
+ The AI component should analyze relevant user-provided financial data and generate personalized insights.
+
+ Possible recommendations:
+
+ - Identify unusually high spending.
+- Suggest budget adjustments.
+- Highlight recurring expenses.
+- Identify potential savings opportunities.
+- Explain spending trends.
+- Provide reminders related to user-defined goals.
+
+ The AI should clearly distinguish estimates and recommendations from factual transaction data.
+
+ ### FR-10 — Smart Alerts
+
+ The system should provide notifications when:
+
+ - A category approaches its budget limit.
+- A budget is exceeded.
+- A savings goal is behind schedule based on the user's stated target.
+- Unusual spending is detected.
+
+ ### FR-11 — Search and Filtering
+
+ Users should be able to filter transactions by:
+
+ - Date
+- Category
+- Amount
+- Transaction type
+
+ ### FR-12 — Reports
+
+ Users should be able to view a monthly financial summary containing:
+
+ - Income
+- Expenses
+- Savings
+- Major spending categories
+- Budget performance
+- AI-generated observations
+
+ ## 5\. Non-Functional Requirements
+
+ ### Performance
+
+ - Pages should load quickly.
+- Dashboard calculations should respond promptly.
+- The application should remain usable with a large transaction history.
+
+ ### Security
+
+ The system should:
+
+ - Secure user authentication.
+- Protect financial information.
+- Use encrypted communication.
+- Restrict users to their own financial records.
+- Avoid exposing sensitive information in logs.
+
+ ### Privacy
+
+ Financial information should be treated as sensitive user data.
+
+ The application should clearly communicate:
+
+ - What data is collected.
+- Why it is collected.
+- How it is stored.
+- How AI features use the data.
+
+ ### Usability
+
+ The interface should be:
+
+ - Simple
+- Clean
+- Beginner-friendly
+- Mobile responsive
+- Accessible
+
+ ### Reliability
+
+ The system should preserve transaction data correctly and handle invalid or incomplete inputs gracefully.
+
+ ### Scalability
+
+ The architecture should allow future additions such as:
+
+ - Mobile apps
+- Multiple currencies
+- Bank integrations
+- Receipt scanning
+- Voice interaction
+
+ ## 6\. User Roles
+
+ ### User
+
+ The primary role.
+
+ Can:
+
+ - Manage profile
+- Add income
+- Add expenses
+- Create budgets
+- Create savings goals
+- View analytics
+- Receive AI recommendations
+
+ ### Administrator
+
+ An optional administrative role for the project.
+
+ Can:
+
+ - Manage users
+- Monitor system health
+- Manage categories
+- Review application-level analytics
+- Manage system configuration
+
+ Administrators should not have unnecessary access to users' financial details.
+
+ ## 7\. System Inputs and Outputs
+
+ ### Inputs
+
+```
+User
+ │
+ ├── Income
+ ├── Expenses
+ ├── Categories
+ ├── Budget
+ ├── Savings Goals
+ └── Preferences
+```
+
+ ### Processing
+
+```
+Financial Data
+      ↓
+Validation
+      ↓
+Database
+      ↓
+Analytics Engine
+      ↓
+AI Recommendation Engine
+      ↓
+Personalized Insights
+```
+
+ ### Outputs
+
+```
+Dashboard
+ ├── Balance
+ ├── Budget Status
+ ├── Spending Charts
+ ├── Savings Progress
+ ├── Alerts
+ └── AI Recommendations
+```
+
+ ## 8\. Core Use Cases
+
+ | Use Case | Actor | Result |
+| --- | --- | --- |
+| Register account | User | Account created |
+| Login | User | Secure access |
+| Add income | User | Income recorded |
+| Add expense | User | Expense recorded |
+| Create budget | User | Budget established |
+| Set savings goal | User | Goal created |
+| View dashboard | User | Financial overview displayed |
+| Analyze spending | System | Spending insights generated |
+| Get AI recommendation | User/System | Personalized recommendation displayed |
+| Receive alert | System | User notified |
+| Generate report | User | Financial summary displayed |
+
+## 9\. Data Requirements
+
+ A basic database could contain:
+
+ ### Users
+
+```
+User
+- user_id
+- name
+- email
+- password_hash
+- currency
+- created_at
+```
+
+ ### Transactions
+
+```
+Transaction
+- transaction_id
+- user_id
+- type
+- amount
+- category
+- description
+- transaction_date
+- created_at
+```
+
+ ### Budgets
+
+```
+Budget
+- budget_id
+- user_id
+- category
+- limit_amount
+- month
+- year
+```
+
+ ### Savings Goals
+
+```
+SavingsGoal
+- goal_id
+- user_id
+- name
+- target_amount
+- current_amount
+- target_date
+- created_at
+```
+
+ ### AI Recommendations
+
+```
+Recommendation
+- recommendation_id
+- user_id
+- recommendation_text
+- category
+- created_at
+- status
+```
+
+ ## 10\. Suggested Technology Requirements
+
+ ### Frontend
+
+ - HTML5
+- CSS3
+- JavaScript
+- React.js for an advanced implementation
+- Chart.js/Recharts for visualization
+
+ ### Backend
+
+ - Node.js
+- Express.js
+- REST API
+
+ ### Database
+
+ - PostgreSQL or MongoDB
+
+ ### AI
+
+ - LLM API for conversational and recommendation features
+- Rule-based calculations for deterministic financial metrics
+
+ ### Authentication
+
+ - JWT or Firebase Authentication
+
+ ## 11\. MVP Requirements
+
+ For the first working version, the project should focus on:
+
+```
+Authentication
+      ↓
+Income & Expense Management
+      ↓
+Budget Creation
+      ↓
+Savings Goals
+      ↓
+Dashboard
+      ↓
+Charts & Analytics
+      ↓
+AI Recommendations
+```
+
+ The MVP does **not** need bank integrations, payment processing, receipt OCR, or a mobile application.
+
+ ## 12\. Requirement Prioritization
+
+ ### Must Have
+
+ - User authentication
+- Income management
+- Expense management
+- Categories
+- Budget management
+- Savings goals
+- Dashboard
+- Basic analytics
+- AI recommendations
+
+ ### Should Have
+
+ - Smart alerts
+- Search/filtering
+- Monthly reports
+- Dark mode
+- Export reports
+
+ ### Could Have
+
+ - Receipt scanning
+- Voice assistant
+- Multiple currencies
+- Family accounts
+- Advanced forecasting
+
+ ### Future
+
+ - Bank integrations
+- Automated transaction synchronization
+- Mobile applications
+- Advanced financial planning features
+
+ ## 13\. Requirement Acceptance Criteria
+
+ The initial system can be considered functional when a user can:
+
+ 1. Register and log in.
+2. Enter monthly income.
+3. Add and categorize expenses.
+4. See the current balance automatically calculated.
+5. Create a monthly budget.
+6. See how much of the budget has been used.
+7. Create a savings goal.
+8. View spending through charts.
+9. Receive an AI-generated recommendation based on available financial data.
+10. Access the application successfully on desktop and mobile screens.
+
+ ## 14\. Requirement Analysis Conclusion
+
+ The **PocketSmart AI** requirements define a personal finance platform centered around three major components:
+
+ **Track → Understand → Improve**
+
+```
+              PocketSmart AI
+                    │
+        ┌───────────┼───────────┐
+        ↓           ↓           ↓
+      TRACK      UNDERSTAND    IMPROVE
+        │           │           │
+    Expenses     Analytics     AI Tips
+    Income       Reports       Budgets
+    Goals        Trends        Savings
+```
+
+ The next project phase can therefore move from **Requirement Analysis → System Design**, covering the **architecture, database ER diagram, use-case diagram, data flow diagram, UI wireframes, API structure, and module design**.
 Project Design Phase
+     # PocketSmart AI — Project Design Phase
+
+ ## 1\. Design Overview
+
+ **Project:** PocketSmart AI\
+ **Title:** _Your Smart Budget & Recommendation Assistant_
+
+ The design phase converts the requirements into a technical blueprint for the application. The system will follow a modular architecture so that budgeting, expense tracking, analytics, and AI recommendations can be developed and maintained independently.
+
+ ### Design Goals
+
+ - Simple and intuitive user interface
+- Secure handling of financial information
+- Accurate financial calculations
+- Personalized AI recommendations
+- Responsive desktop and mobile experience
+- Modular and scalable architecture
+
+---
+
+ ## 2\. Proposed System Architecture
+
+ PocketSmart AI can use a **three-tier architecture**:
+
+```
+┌───────────────────────────────────────────────┐
+│                 PRESENTATION                  │
+│                                               │
+│  React / HTML / CSS / JavaScript              │
+│  Dashboard • Forms • Charts • AI Chat        │
+└───────────────────────┬───────────────────────┘
+                        │ REST API
+                        ↓
+┌───────────────────────────────────────────────┐
+│                 APPLICATION                   │
+│                                               │
+│  Node.js + Express                            │
+│                                               │
+│  Authentication                               │
+│  Budget Management                            │
+│  Expense Management                            │
+│  Goal Management                              │
+│  Analytics                                    │
+│  Recommendation Service                       │
+└───────────────────────┬───────────────────────┘
+                        │
+            ┌───────────┴───────────┐
+            ↓                       ↓
+┌──────────────────────┐   ┌────────────────────┐
+│      DATABASE        │   │     AI SERVICE     │
+│                      │   │                    │
+│    PostgreSQL        │   │ Recommendation     │
+│    Users             │   │ & Conversation     │
+│    Transactions      │   │                    │
+│    Budgets           │   └────────────────────┘
+│    Goals             │
+└──────────────────────┘
+```
+
+---
+
+ # 3\. System Modules
+
+ ## 3.1 Authentication Module
+
+ Responsible for:
+
+ - Registration
+- Login
+- Logout
+- Password management
+- Session/token management
+
+```
+User
+ ↓
+Registration/Login
+ ↓
+Authentication
+ ↓
+Dashboard
+```
+
+---
+
+ ## 3.2 User Profile Module
+
+ Stores user preferences such as:
+
+ - Name
+- Email
+- Currency
+- Monthly income
+- Financial goals
+- Notification preferences
+
+---
+
+ ## 3.3 Expense Management Module
+
+ Users can:
+
+ - Add expenses
+- Edit expenses
+- Delete expenses
+- Categorize expenses
+- Search transactions
+- Filter by date/category
+
+ Example:
+
+```
+Expense
+├── Amount: ₹850
+├── Category: Food
+├── Description: Restaurant
+└── Date: 02 Oct 2026
+```
+
+---
+
+ ## 3.4 Income Management Module
+
+ Handles:
+
+ - Salary
+- Freelance income
+- Business income
+- Other income sources
+
+ The system calculates:
+
+```
+Available Balance =
+Total Income - Total Expenses
+```
+
+---
+
+ ## 3.5 Budget Management Module
+
+ Users can create:
+
+ - Overall monthly budgets
+- Category-specific budgets
+
+ Example:
+
+```
+Monthly Budget: ₹50,000
+
+Food          ₹6,000
+Transport     ₹4,000
+Shopping      ₹5,000
+Bills         ₹10,000
+Entertainment ₹3,000
+Savings       ₹12,000
+Other         ₹10,000
+```
+
+---
+
+ # 4\. Savings Goal Module
+
+ Users can define financial goals.
+
+ ### Example
+
+```
+Goal: Emergency Fund
+
+Target:        ₹50,000
+Current:       ₹30,000
+Remaining:     ₹20,000
+Progress:      60%
+Target Date:   June 2027
+```
+
+ Progress calculation:
+
+```
+Progress (%) =
+(Current Savings / Target Amount) × 100
+```
+
+---
+
+ # 5\. Analytics Module
+
+ The analytics engine converts transaction data into visual information.
+
+ ### Dashboard Metrics
+
+```
+┌────────────────────────────────────┐
+│ Monthly Income       ₹50,000       │
+│ Monthly Expenses     ₹31,200       │
+│ Savings              ₹18,800       │
+│ Budget Used             62.4%      │
+└────────────────────────────────────┘
+```
+
+ ### Visualizations
+
+ - Expense pie chart
+- Monthly spending line chart
+- Category bar chart
+- Income vs. expense chart
+- Savings progress chart
+
+---
+
+ # 6\. AI Recommendation Module
+
+ This is one of the central components of PocketSmart AI.
+
+ ### Processing Flow
+
+```
+User Financial Data
+        ↓
+Data Validation
+        ↓
+Spending Analysis
+        ↓
+Pattern Detection
+        ↓
+Recommendation Generation
+        ↓
+User Dashboard
+```
+
+ ### Example
+
+ Input:
+
+```
+Food spending:
+Previous month = ₹3,200
+Current month  = ₹4,500
+```
+
+ AI insight:
+
+ > “Your food spending has increased compared with the previous month. Consider reviewing restaurant and delivery expenses.”
+
+ The system should keep factual calculations separate from AI-generated interpretation.
+
+---
+
+ # 7\. Database Design
+
+ A relational database such as PostgreSQL can be used.
+
+ ## Entity Relationship Concept
+
+```
+                ┌──────────────┐
+                │    USERS     │
+                └──────┬───────┘
+                       │
+          ┌────────────┼────────────┐
+          ↓            ↓            ↓
+   ┌────────────┐ ┌──────────┐ ┌──────────────┐
+   │TRANSACTIONS│ │ BUDGETS  │ │ SAVINGS_GOALS│
+   └────────────┘ └──────────┘ └──────────────┘
+          │
+          ↓
+   ┌────────────┐
+   │ CATEGORIES │
+   └────────────┘
+
+                USERS
+                  │
+                  ↓
+          ┌────────────────┐
+          │RECOMMENDATIONS │
+          └────────────────┘
+```
+
+---
+
+ # 8\. Database Tables
+
+ ### Users
+
+```
+users
+-------------------------
+id
+name
+email
+password_hash
+currency
+created_at
+updated_at
+```
+
+ ### Transactions
+
+```
+transactions
+-------------------------
+id
+user_id
+type
+amount
+category_id
+description
+transaction_date
+created_at
+```
+
+ ### Categories
+
+```
+categories
+-------------------------
+id
+name
+type
+```
+
+ ### Budgets
+
+```
+budgets
+-------------------------
+id
+user_id
+category_id
+amount
+month
+year
+created_at
+```
+
+ ### Savings Goals
+
+```
+savings_goals
+-------------------------
+id
+user_id
+name
+target_amount
+current_amount
+target_date
+created_at
+```
+
+ ### Recommendations
+
+```
+recommendations
+-------------------------
+id
+user_id
+message
+category
+created_at
+```
+
+---
+
+ # 9\. UI/UX Design
+
+ ## Main Navigation
+
+```
+┌──────────────────────────────────────────────┐
+│ 🟣 PocketSmart AI                            │
+│                                              │
+│ Dashboard   Transactions   Budget   Goals    │
+│ Analytics   AI Assistant        Profile      │
+└──────────────────────────────────────────────┘
+```
+
+ ## Dashboard Layout
+
+```
+┌──────────────────────────────────────────────────┐
+│ Good morning! 👋                                 │
+│ Here's your financial overview.                  │
+├──────────────┬──────────────┬────────────────────┤
+│ Income       │ Expenses     │ Balance            │
+│ ₹50,000      │ ₹31,200      │ ₹18,800            │
+├──────────────┴──────────────┴────────────────────┤
+│                                                  │
+│             Spending Overview                    │
+│              [Chart Area]                        │
+│                                                  │
+├─────────────────────────┬────────────────────────┤
+│ Budget Progress          │ Savings Goal           │
+│ ███████████░░ 72%       │ ████████░░ 64%        │
+├─────────────────────────┴────────────────────────┤
+│ 🤖 PocketSmart AI Recommendation                 │
+│                                                  │
+│ Review your dining expenses this month...        │
+└──────────────────────────────────────────────────┘
+```
+
+---
+
+ # 10\. Color Design
+
+ | Element | Color |
+| --- | --- |
+| Primary | `#6C5CE7` |
+| Secondary | `#00B894` |
+| Background | `#F7F7FC` |
+| Dark | `#151528` |
+| Warning | `#FDCB6E` |
+| Error | `#FF7675` |
+| White | `#FFFFFF` |
+
+### Design Style
+
+ The interface should have:
+
+ - Rounded cards
+- Soft shadows
+- Clean typography
+- Simple icons
+- Accessible contrast
+- Responsive layouts
+- Minimal visual clutter
+
+---
+
+ # 11\. API Design
+
+ A REST API can connect the frontend and backend.
+
+ ### Authentication
+
+```
+POST /api/auth/register
+POST /api/auth/login
+POST /api/auth/logout
+```
+
+ ### Transactions
+
+```
+GET    /api/transactions
+POST   /api/transactions
+PUT    /api/transactions/:id
+DELETE /api/transactions/:id
+```
+
+ ### Budgets
+
+```
+GET    /api/budgets
+POST   /api/budgets
+PUT    /api/budgets/:id
+DELETE /api/budgets/:id
+```
+
+ ### Goals
+
+```
+GET    /api/goals
+POST   /api/goals
+PUT    /api/goals/:id
+DELETE /api/goals/:id
+```
+
+ ### Analytics
+
+```
+GET /api/analytics/summary
+GET /api/analytics/expenses
+GET /api/analytics/trends
+```
+
+ ### AI
+
+```
+POST /api/ai/recommendation
+POST /api/ai/chat
+```
+
+---
+
+ # 12. Security Design
+
+ Security should be built into the architecture rather than added later.
+
+ ### Authentication
+
+```
+Password
+   ↓
+Hashing
+   ↓
+Database
+```
+
+ Passwords should never be stored as plain text.
+
+ ### API Security
+
+ - Authentication middleware
+- Authorization checks
+- Input validation
+- Rate limiting
+- Secure HTTP connections
+- Parameterized database queries
+- Appropriate error handling
+
+ ### Data Isolation
+
+ Every transaction, budget, and goal should be associated with a user ID.
+
+```
+Request
+   ↓
+Authenticate User
+   ↓
+Get user_id
+   ↓
+Query only that user's records
+```
+
+---
+
+ # 13\. AI Architecture
+
+ A safer design is to avoid sending unnecessary financial information to the AI service.
+
+```
+                User Data
+                    ↓
+             Data Processing
+                    ↓
+          ┌─────────┴─────────┐
+          ↓                   ↓
+   Deterministic         AI Service
+   Calculations               │
+          │                   ↓
+          │            Recommendation
+          └─────────┬─────────┘
+                    ↓
+              Validation
+                    ↓
+               Dashboard
+```
+
+ For example, balances and percentages should be calculated by the application's financial logic rather than asking an AI model to perform critical arithmetic.
+
+---
+
+ # 14\. Project Folder Structure
+
+ A React + Node.js implementation could use:
+
+```
+PocketSmart-AI/
+│
+├── client/
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Navbar.jsx
+│   │   │   ├── Sidebar.jsx
+│   │   │   ├── BudgetCard.jsx
+│   │   │   ├── ExpenseList.jsx
+│   │   │   ├── GoalCard.jsx
+│   │   │   └── AIRecommendation.jsx
+│   │   │
+│   │   ├── pages/
+│   │   │   ├── Login.jsx
+│   │   │   ├── Register.jsx
+│   │   │   ├── Dashboard.jsx
+│   │   │   ├── Transactions.jsx
+│   │   │   ├── Budget.jsx
+│   │   │   ├── Goals.jsx
+│   │   │   ├── Analytics.jsx
+│   │   │   └── AIAssistant.jsx
+│   │   │
+│   │   ├── services/
+│   │   ├── hooks/
+│   │   ├── utils/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   │
+│   └── package.json
+│
+├── server/
+│   ├── controllers/
+│   ├── routes/
+│   ├── models/
+│   ├── middleware/
+│   ├── services/
+│   │   ├── analyticsService.js
+│   │   └── aiService.js
+│   ├── config/
+│   ├── app.js
+│   └── package.json
+│
+├── database/
+│   └── schema.sql
+│
+├── .env
+├── README.md
+└── package.json
+```
+
+---
+
+ # 15\. Main User Journey
+
+```
+             ┌──────────────┐
+             │ Landing Page │
+             └───────┬──────┘
+                     ↓
+             ┌──────────────┐
+             │ Register /   │
+             │ Login        │
+             └───────┬──────┘
+                     ↓
+             ┌──────────────┐
+             │ Setup        │
+             │ Financial    │
+             │ Profile      │
+             └───────┬──────┘
+                     ↓
+             ┌──────────────┐
+             │ Dashboard    │
+             └───────┬──────┘
+                     ↓
+        ┌────────────┼────────────┐
+        ↓            ↓            ↓
+    Expenses      Budget        Goals
+        │            │            │
+        └────────────┼────────────┘
+                     ↓
+               Analytics
+                     ↓
+              AI Assistant
+                     ↓
+             Recommendations
+```
+
+---
+
+ # 16\. Design Deliverables
+
+ At the end of the Project Design Phase, the project should have:
+
+ - ✅ System architecture
+- ✅ Module architecture
+- ✅ Database design
+- ✅ ER diagram
+- ✅ User-flow design
+- ✅ UI/UX wireframes
+- ✅ Color and typography guidelines
+- ✅ REST API design
+- ✅ Folder/project structure
+- ✅ AI architecture
+- ✅ Security architecture
+
+ ## 17\. Design Phase Conclusion
+
+ The proposed design makes **PocketSmart AI** a modular financial-management platform built around:
+
+ > **Track → Analyze → Recommend → Improve**
+
+ The **frontend** provides the user experience, the **backend** manages business logic and APIs, the **database** stores financial information, and the **AI service** transforms relevant financial patterns into understandable recommendations.
+
+ The next phase can be **Development / Implementation**, beginning with the database, backend APIs, authentication, and responsive PocketSmart AI dashboard.
 Project Planning Phase
 Project Development Phase
 Project Testing Phase
