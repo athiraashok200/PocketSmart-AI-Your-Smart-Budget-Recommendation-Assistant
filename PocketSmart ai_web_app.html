@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PocketSmart AI — Smart Budget & Recommendation Assistant</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Inter, Arial, sans-serif;
+    }
+
+    :root {
+      --primary: #6c5ce7;
+      --primary-dark: #5142c4;
+      --secondary: #00b894;
+      --dark: #151528;
+      --text: #55556d;
+      --light: #f7f7fc;
+      --white: #ffffff;
+      --border: #e9e9f2;
+      --danger: #ff7675;
+    }
+
+    body {
+      background: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Navbar */
+    nav {
+      width: 100%;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: auto;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 21px;
+      font-weight: 800;
+    }
+
+    .logo-icon {
+      width: 38px;
+      height: 38px;
+      background: linear-gradient(135deg, var(--primary), #8e7dff);
+      color: white;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-weight: bold;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      border: none;
+      cursor: pointer;
+      padding: 12px 20px;
+      border-radius: 10px;
+      font-weight: 700;
+      transition: 0.25s;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    .btn-light {
+      background: white;
+      color: var(--primary);
+      border: 1px solid var(--border);
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1180px;
+      margin: auto;
+      padding: 90px 24px 70px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    .badge {
+      display: inline-block;
+      background: #eeeaff;
+      color: var(--primary);
+      padding: 7px 13px;
+      border-radius: 50px;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-size: clamp(42px, 5vw, 68px);
+      line-height: 1.08;
+      margin-bottom: 22px;
+      letter-spacing: -2px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--primary), #00a884);
+      -webkit-background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 18px;
+      color: var(--text);
+      max-width: 550px;
+      margin-bottom: 30px;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    /* Dashboard Preview */
+    .dashboard {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 20px;
+      box-shadow: 0 25px 70px rgba(66, 50, 150, 0.15);
+      transform: rotate(1deg);
+    }
+
+    .dash-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .dash-title {
+      font-weight: 800;
+    }
+
+    .status {
+      color: var(--secondary);
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .balance-card {
+      background: linear-gradient(135deg, #6c5ce7, #8374f4);
+      color: white;
+      padding: 22px;
+      border-radius: 18px;
+      margin-bottom: 18px;
+    }
+
+    .balance-card small {
+      opacity: .8;
+    }
+
+    .balance {
+      font-size: 32px;
+      font-weight: 800;
+      margin-top: 5px;
+    }
+
+    .dash-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .mini-card {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+    }
+
+    .mini-card small {
+      color: #88889b;
+    }
+
+    .mini-value {
+      font-size: 21px;
+      font-weight: 800;
+      margin-top: 4px;
+    }
+
+    .progress {
+      height: 8px;
+      background: #eeeef5;
+      border-radius: 20px;
+      margin-top: 12px;
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      height: 100%;
+      width: 72%;
+      background: var(--secondary);
+      border-radius: 20px;
+    }
+
+    /* Features */
+    .section {
+      max-width: 1180px;
+      margin: auto;
+      padding: 80px 24px;
+    }
+
+    .section-header {
+      text-align: center;
+      max-width: 680px;
+      margin: auto auto 45px;
+    }
+
+    .section-header h2 {
+      font-size: 38px;
+      margin-bottom: 12px;
+    }
+
+    .section-header p {
+      color: var(--text);
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .feature {
+      background: white;
+      padding: 30px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      transition: .25s;
+    }
+
+    .feature:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 35px rgba(0,0,0,.07);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: #eeeaff;
+      color: var(--primary);
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .feature h3 {
+      margin-bottom: 8px;
+    }
+
+    .feature p {
+      color: var(--text);
+      font-size: 14px;
+    }
+
+    /* AI Section */
+    .ai-section {
+      background: var(--dark);
+      color: white;
+      border-radius: 30px;
+      max-width: 1132px;
+      margin: 30px auto;
+      padding: 65px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+    }
+
+    .ai-section p {
+      color: #b8b8cc;
+      margin: 15px 0 25px;
+    }
+
+    .recommendations {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .recommendation {
+      background: #22223a;
+      border: 1px solid #363650;
+      padding: 16px;
+      border-radius: 14px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .rec-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: #302d55;
+      border-radius: 10px;
+    }
+
+    .recommendation strong {
+      display: block;
+      margin-bottom: 3px;
+    }
+
+    .recommendation small {
+      color: #aaaabe;
+    }
+
+    /* Stats */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      text-align: center;
+    }
+
+    .stat {
+      padding: 25px;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    .stat h3 {
+      font-size: 30px;
+      color: var(--primary);
+    }
+
+    .stat p {
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    /* CTA */
+    .cta {
+      text-align: center;
+      background: linear-gradient(135deg, #6c5ce7, #00a884);
+      color: white;
+      border-radius: 28px;
+      padding: 65px 25px;
+    }
+
+    .cta h2 {
+      font-size: 40px;
+      margin-bottom: 12px;
+    }
+
+    .cta p {
+      opacity: .9;
+      margin-bottom: 25px;
+    }
+
+    /* Footer */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 30px 24px;
+      text-align: center;
+      color: #77778a;
+      font-size: 13px;
+    }
+
+    /* Responsive */
+    @media (max-width: 850px) {
+      .hero,
+      .ai-section {
+        grid-template-columns: 1fr;
+      }
+
+      .features {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .dashboard {
+        transform: none;
+      }
+
+      .ai-section {
+        margin: 20px;
+        padding: 40px 25px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 60px;
+      }
+
+      .features,
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h1 {
+        font-size: 43px;
+      }
+
+      .section-header h2 {
+        font-size: 30px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="nav-container">
+      <div class="logo">
+        <div class="logo-icon">P</div>
+        PocketSmart AI
+      </div>
+
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#ai">AI Assistant</a>
+        <a href="#about">About</a>
+        <button class="btn btn-primary" onclick="startApp()">
+          Get Started
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero">
+
+    <div>
+      <span class="badge">✨ AI-Powered Personal Finance</span>
+
+      <h1>
+        Your money.
+        <span class="gradient-text">Smarter.</span>
+      </h1>
+
+      <p>
+        PocketSmart AI helps you create budgets, understand your spending,
+        reach financial goals, and receive personalized recommendations
+        powered by artificial intelligence.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn btn-primary" onclick="startApp()">
+          Start Managing Money →
+        </button>
+
+        <button class="btn btn-light" onclick="scrollToFeatures()">
+          Explore Features
+        </button>
+      </div>
+    </div>
+
+    <!-- Dashboard Preview -->
+    <div class="dashboard">
+
+      <div class="dash-top">
+        <div class="dash-title">Financial Overview</div>
+        <div class="status">● Healthy</div>
+      </div>
+
+      <div class="balance-card">
+        <small>Available Balance</small>
+        <div class="balance">₹42,580</div>
+        <small>+12.4% this month</small>
+      </div>
+
+      <div class="dash-grid">
+
+        <div class="mini-card">
+          <small>Monthly Budget</small>
+          <div class="mini-value">₹60,000</div>
+          <div class="progress">
+            <span></span>
+          </div>
+        </div>
+
+        <div class="mini-card">
+          <small>Expenses</small>
+          <div class="mini-value">₹17,420</div>
+          <small>28.9% used</small>
+        </div>
+
+        <div class="mini-card">
+          <small>Monthly Savings</small>
+          <div class="mini-value">₹12,300</div>
+          <small>↑ 8.2%</small>
+        </div>
+
+        <div class="mini-card">
+          <small>AI Score</small>
+          <div class="mini-value">86/100</div>
+          <small>Great progress!</small>
+        </div>
+
+      </div>
+    </div>
+
+  </section>
+
+  <!-- Features -->
+  <section class="section" id="features">
+
+    <div class="section-header">
+      <h2>Everything you need to manage money</h2>
+      <p>
+        PocketSmart combines budgeting, expense tracking and AI-powered
+        recommendations into one simple platform.
+      </p>
+    </div>
+
+    <div class="features">
+
+      <div class="feature">
+        <div class="feature-icon">💰</div>
+        <h3>Smart Budgeting</h3>
+        <p>
+          Create personalized budgets based on your income,
+          spending patterns and financial goals.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">📊</div>
+        <h3>Expense Tracking</h3>
+        <p>
+          Monitor your expenses and understand exactly where
+          your money goes every month.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🤖</div>
+        <h3>AI Recommendations</h3>
+        <p>
+          Get intelligent suggestions to reduce unnecessary
+          spending and improve your financial habits.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🎯</div>
+        <h3>Financial Goals</h3>
+        <p>
+          Set savings goals and track your progress toward
+          the things that matter to you.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔔</div>
+        <h3>Smart Alerts</h3>
+        <p>
+          Receive useful alerts when your spending approaches
+          your budget limits.
+        </p>
+      </div>
+
+      <div class="feature">
+        <div class="feature-icon">🔒</div>
+        <h3>Privacy Focused</h3>
+        <p>
+          Keep your financial information protected with
+          privacy-focused design principles.
+        </p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- AI Section -->
+  <section class="ai-section" id="ai">
+
+    <div>
+      <span class="badge">🤖 PocketSmart Intelligence</span>
+
+      <h2>Your personal AI financial assistant</h2>
+
+      <p>
+        PocketSmart AI analyzes your financial activity and turns
+        your data into simple, actionable insights.
+      </p>
+
+      <button class="btn btn-primary" onclick="showRecommendation()">
+        Ask PocketSmart AI
+      </button>
+    </div>
+
+    <div class="recommendations">
+
+      <div class="recommendation">
+        <div class="rec-icon">💡</div>
+        <div>
+          <strong>Save ₹1,500 this month</strong>
+          <small>
+            Your dining expenses are higher than your usual average.
+          </small>
+        </div>
+      </div>
+
+      <div class="recommendation">
+        <div class="rec-icon">🎯</div>
+        <div>
+          <strong>You're 72% toward your goal</strong>
+          <small>
+            Keep your current savings rate to reach your goal sooner.
+          </small>
+        </div>
+      </div>
+
+      <div class="recommendation">
+        <div class="rec-icon">📈</div>
+        <div>
+          <strong>Spending trend looks positive</strong>
+          <small>
+            Your monthly discretionary spending decreased recently.
+          </small>
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- Stats -->
+  <section class="section" id="about">
+
+    <div class="section-header">
+      <h2>Built for smarter financial habits</h2>
+      <p>
+        Simple insights that help turn everyday financial data into
+        meaningful decisions.
+      </p>
+    </div>
+
+    <div class="stats">
+
+      <div class="stat">
+        <h3>24/7</h3>
+        <p>AI Assistance</p>
+      </div>
+
+      <div class="stat">
+        <h3>100%</h3>
+        <p>Personalized Insights</p>
+      </div>
+
+      <div class="stat">
+        <h3>6+</h3>
+        <p>Finance Tools</p>
+      </div>
+
+      <div class="stat">
+        <h3>1</h3>
+        <p>Simple Dashboard</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+
+    <div class="cta">
+      <h2>Take control of your money.</h2>
+
+      <p>
+        Start building smarter financial habits with PocketSmart AI.
+      </p>
+
+      <button class="btn btn-light" onclick="startApp()">
+        Get Started for Free →
+      </button>
+    </div>
+
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    © 2026 PocketSmart AI. Your Smart Budget & Recommendation Assistant.
+  </footer>
+
+  <script>
+
+    function startApp() {
+      alert(
+        "Welcome to PocketSmart AI! 🚀\n\n" +
+        "Your personalized finance dashboard is ready to launch."
+      );
+    }
+
+    function showRecommendation() {
+      alert(
+        "🤖 PocketSmart AI:\n\n" +
+        "Based on your current spending pattern, " +
+        "consider setting a weekly discretionary spending limit " +
+        "to stay within your monthly budget."
+      );
+    }
+
+    function scrollToFeatures() {
+      document.getElementById("features").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+  </script>
+
+</body>
+</html>
